@@ -43,7 +43,7 @@
                        </p>
                      </div>
                      <div class="align-right">
-                     <form  id="delete-post" method="POST" action="/blog/{{$post->id}}">
+                     <form  id="delete-post" method="POST" action="{{url('delete-post')}}">
                         @method('DELETE')
                         @csrf
                         <button  class="btn btn-danger">Delete</button>
