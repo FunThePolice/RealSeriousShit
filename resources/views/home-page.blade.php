@@ -37,13 +37,13 @@
                         {{ucwords($post->title)}}
                      </h1>
                   </div>
-                     <div class="text-sm mt-4">    
+                     <div class="text-sm mt-4">
                        <p>
                         {{$post->description}}
                        </p>
                      </div>
                      <div class="align-right">
-                     <form  id="delete-post" method="POST" action="{{url('delete-post')}}">
+                     <form  id="delete-post" method="POST" action="{{url('delete-post', ['id' => $post->id])}}">
                         @method('DELETE')
                         @csrf
                         <button  class="btn btn-danger">Delete</button>
