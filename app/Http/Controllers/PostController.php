@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    
+
     public function index()
     {
         $posts = Post::all();
@@ -14,6 +14,12 @@ class PostController extends Controller
             'posts'=> $posts,
         ]);
     }
+
+    public function show(Post $post)
+    {}
+
+    public function update(Post $post)
+    {}
 
     public function store(Request $request)
     {
@@ -28,7 +34,7 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect('/blog');
-    }  
+    }
 }
 
 
