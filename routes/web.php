@@ -18,7 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/blog', [PostController::class, 'index']);
+Route::get('/blog/{post}', [PostController::class,'show']);
 Route::delete('delete-post/{post}',[PostController::class, 'destroy']);
+Route::get('edit-post/{post}', [PostController::class, 'edit']);
+Route::put('update-post/{post}', [PostController::class, 'update']);
 Route::post('store-form',[PostController::class, 'store']);
 
 
