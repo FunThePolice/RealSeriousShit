@@ -11,7 +11,7 @@
         Create a post
       </div>
       <div class="card-body">
-        <form name="add-blog-post-form" id="add-blog-post-form" method="POST" action="{{url('update-post', ['id' => $post->id])}}">
+        <form name="add-blog-post-form" id="add-blog-post-form" method="POST" action="{{url('post-update', ['id' => $post->id])}}">
          @csrf
          @method('PUT')
           <div class="form-group">
@@ -34,3 +34,4 @@
         </form>
       </div>
     </div>
+@endsection    

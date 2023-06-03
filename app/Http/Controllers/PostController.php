@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,26 +12,25 @@ class PostController extends Controller
     {
         $posts = Post::all();
         return view('home-page',[
-            'posts'=> $posts,
-            'post'=>$post
+            'posts' => $posts,
+            'post' => $post,
         ]);
     }
 
-    public function show(Post $post)
+    public function show(Post $post, Comment $comment)
     {
+        $comments = Comment::all();
+        $post->increment('views');
         return view('post',[
-            'post'=>$post,
+            'post' => $post,
+            'comments' => $comments,
+            'comment' => $comment
         ]);
     }
 
     public function update(Request $request, Post $post)
     {
-        $post->update([
-            'title'=>$request->title,
-            'category'=>$request->category,
-            'description'=>$request->description,
-            'body'=>$request->body 
-        ]);
+        $post->update($request->all());    
         return redirect('/blog');
     }
 
@@ -43,11 +43,8 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $post = new Post;
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->category = $request->category;
-        $post->body = $request->body;
+        $post = new Post();
+        $post->fill($request->all());
         $post->save();
         return redirect('/blog')->with('status' , 'Blog Post Form Data Has Been inserted');
     }

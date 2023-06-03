@@ -39,27 +39,28 @@
         </div>
           <table class="table">
           <thead>
-            <tr>
-              <th scope="col">#</th>
+            <tr>             
               <th scope="col">Title</th>
               <th scope="col">Description</th>
               <th scope="col">Category</th>
+              <th scope="col"></th>
             </tr>
           </thead>
            <tbody>
              @foreach ($posts as $post )
             <tr>
-              <th scope="row">{{$post->id}}</th>
               <td>{{ucwords($post->title)}} <br>
                 <a href="/blog/{{$post->id}}" class="btn btn-primary btn-sm mt-4">Show</a></td>
-              <td>{{ucwords($post->description)}}</td>
-              <td>{{ucwords($post->category)}} <br>
-                <form  id="edit-post" method="POST" action="{{url('edit-post', ['id' => $post->id])}}">
+              <td>{{ucwords($post->description)}} <br>
+                 Views:{{$post->views}}</td>
+              <td>{{ucwords($post->category)}} </td>
+              <td>
+                <form  id="post-edit" method="POST" action="{{url('post-edit', ['id' => $post->id])}}">
                   @method('GET')
                   @csrf
                   <button  class="btn btn-primary">Edit</button>
                   </form>
-                <form  id="delete-post" method="POST" action="{{url('delete-post', ['id' => $post->id])}}">
+                <form  id="post-delete" method="POST" action="{{url('post-delete', ['id' => $post->id])}}">
                   @method('DELETE')
                   @csrf
                   <button  class="btn btn-danger btn-sm mt-4">Delete</button>
@@ -70,4 +71,4 @@
            </tbody>
           </table>
         </div>
-        @endsection
+@endsection
