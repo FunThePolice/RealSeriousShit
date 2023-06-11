@@ -37,18 +37,38 @@
           <tr>             
             <th scope="col">Title</th>
             <th scope="col">Body</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($comments as $comment)
+          @foreach ($post->comments as $comment)
+          @if ($post->id == $comment->commentable_id)
+           <tr>
+             <td>{{ucwords($comment->title)}}</td>
+             <td>{{ucwords($comment->body)}}</td>
+             <td>
+               <form  id="add-reply-form" method="POST" action="{{route('reply.create', ['comment' => $comment->id])}}">
+               @method('GET')
+               @csrf
+               <button  class="btn btn-primary">Reply</button>
+               </form>
+             </td>
+           </tr>
+          @foreach ($comment->replies as $comment)         
           <tr>
-            <td>{{ucwords($comment->title)}}</td>
-            <td>{{ucwords($comment->body)}}</td>
-          </tr>
+            <td colspan="2">{{$comment->body}}</td>
+            <td>
+              <form  id="add-reply-form" method="POST" action="{{route('reply.create', ['comment' => $comment->id])}}">
+                @method('GET')
+                @csrf
+                <button  class="btn btn-primary">Reply</button>
+                </form>
+          @endforeach
+          @endif
           @endforeach
         </tbody>
       </table>
-      <form name="add-comment-form" id="add-comment-form" method="POST" action="{{url('comment-store')}}">
+      <form name="add-comment-form" id="add-comment-form" method="POST" action="{{route('comment.save',['post' => $post->id])}}">
         @csrf
          <div class="form-group">
            <label for="exampleInputEmail1">Title</label>

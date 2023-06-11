@@ -11,14 +11,24 @@ class CommentController extends Controller
     {
         $comment = new Comment();
         $comment->fill($request->all());
-        $post = Post::find($request->post_id);
         $post->comments()->save($comment);
         return back()->withInput();
+    }
+    public function reply(Request $request, Comment $comment)
+    {
+        $reply = new Comment();
+        $reply->fill($request->all());
+        $comment->replies()->save($reply);
+        return back()->withInput();
+    }
+    public function create(Comment $comment)
+    {
+        return view('comment-reply',compact('comment'));
     }
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return redirect('/blog/{post}');
+        return back()->withInput();
     }
 
 }

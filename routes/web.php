@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Http\Controllers\PostController;
 Закончить комментарии(миграция , модель , контроллеры, рауты, посмотреть как привязать к посту)
 Прочитать как писать код(отступы и тд.)
 Попробовать довести до ума фронт
-
+Закончить реплаи и проверить
 */
 
 Route::get('/', function () {
@@ -36,8 +37,10 @@ Route::controller(PostController::class)->group(function () {
 Route::post('store-form',[PostController::class, 'store']);
 
 Route::controller(CommentController::class)->group(function() {
-    Route::post('comment-store','store');
+    Route::post('comment-store/{post}','store')->name('comment.save');
     Route::delete('comment-delete/{comment}', 'destroy');
+    Route::post('comment-reply/{comment}','reply')->name('comment.reply');
+    Route::get('reply-create/{comment}','create')->name('reply.create');
 });
 
 
