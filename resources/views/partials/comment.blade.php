@@ -1,7 +1,7 @@
 <tr>
     @if(isset($depth))
         @for($depth; $depth > 0; $depth--)
-            <td bgcolor="{{ sprintf('#%06X', mt_rand(0, 0xFFFFFF)) }}"></td bgcolor="{{ sprintf('#%06X', mt_rand(0, 0xFFFFFF)) }}">
+            <td ></td >
         @endfor
     @endif
     <td>{{ucwords($comment->title)}}</td>

@@ -11,22 +11,23 @@
                 {{ucwords($post->title)}}
             </div>
             <div class="card-body">
+                @foreach ($post->images as $image)
+                <img src="{{ asset('storage/' . $image->name) }}" alt="Image" width="300" height="250"/>
+                @endforeach
                 {{ucwords($post->body)}}
             </div>
-            <div class="card-footer display:flex">
+            <div class="card-footer display:flex justify-content:space-between align-items:center">
                 <a href="/blog" class="btn btn-outline-primary"> Go back</a>
-                <div class="display:flex" style="margin-top: 20px">
-                    <form id="post-edit" method="POST" action="{{url('post-edit', ['id' => $post->id])}}">
+                    <form id="post-edit" method="POST" action="{{route('post.edit', ['post' => $post->id])}}">
                         @method('GET')
                         @csrf
                         <button class="btn btn-primary">Edit</button>
                     </form>
-                    <form id="post-delete" method="POST" action="{{url('post-delete', ['id' => $post->id])}}">
+                    <form id="post-delete" method="POST" action="{{route('post.delete', ['post' => $post->id])}}">
                         @method('DELETE')
                         @csrf
                         <button class="btn btn-danger btn-sm mt-4">Delete</button>
-                    </form>
-                </div>
+                    </form>               
             </div>
             <div class="card">
                 <div class="card-header text-center font-weight-bold">

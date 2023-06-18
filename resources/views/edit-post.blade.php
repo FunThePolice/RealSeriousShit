@@ -8,10 +8,10 @@
     @endif
     <div class="card">
       <div class="card-header text-center font-weight-bold">
-        Create a post
+        Edit a post
       </div>
       <div class="card-body">
-        <form name="add-blog-post-form" id="add-blog-post-form" method="POST" action="{{url('post-update', ['id' => $post->id])}}">
+        <form name="add-blog-post-form" id="add-blog-post-form" method="POST" action="{{route('post.update', ['post' => $post->id])}}">
          @csrf
          @method('PUT')
           <div class="form-group">
@@ -31,6 +31,7 @@
             <textarea name="body" class="form-control" required="">{{$post->body}}</textarea>
           </div>
           <button type="submit" class="btn btn-primary">Update</button>
+          <a href="/blog" class="btn btn-outline-primary"> Go back</a>
         </form>
       </div>
     </div>

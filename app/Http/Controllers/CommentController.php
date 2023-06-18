@@ -14,6 +14,7 @@ class CommentController extends Controller
         $post->comments()->save($comment);
         return back()->withInput();
     }
+
     public function reply(Request $request, Comment $comment)
     {
         $reply = new Comment();
@@ -21,10 +22,12 @@ class CommentController extends Controller
         $comment->replies()->save($reply);
         return back()->withInput();
     }
+
     public function create(Comment $comment)
     {
         return view('comment-reply',compact('comment'));
     }
+    
     public function destroy(Comment $comment)
     {
         $comment->delete();
