@@ -26,6 +26,11 @@
         </div>
         <div class="form-group">
             <input type="file" class="form-control" name="image" id="image">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Create a tag</label>
+          <input type="text" id="tag" name="tag_name" class="form-control">
+        </div>    
         <button type="submit" class="btn btn-primary">Submit</button>
         <a href="/blog" class="btn btn-outline-primary"> Go back</a>
       </form>

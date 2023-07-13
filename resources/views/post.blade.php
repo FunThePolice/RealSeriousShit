@@ -16,8 +16,11 @@
                 @endforeach
                 {{ucwords($post->body)}}
             </div>
-            <div class="card-footer display:flex justify-content:space-between align-items:center">
-                <a href="/blog" class="btn btn-outline-primary"> Go back</a>
+                <div class="card-footer display:flex justify-content:space-between align-items:center">
+                    <div>
+                    <a href="/blog" class="btn btn-outline-primary"> Go back</a>
+                    </div>
+                    <div>
                     <form id="post-edit" method="POST" action="{{route('post.edit', ['post' => $post->id])}}">
                         @method('GET')
                         @csrf
@@ -27,8 +30,14 @@
                         @method('DELETE')
                         @csrf
                         <button class="btn btn-danger btn-sm mt-4">Delete</button>
-                    </form>               
-            </div>
+                    </form>
+                    </div>
+                </div>
+                <div>
+                    @foreach ($post->tags as $tag)
+                        {{$tag->tag_name}} |
+                    @endforeach
+                </div>    
             <div class="card">
                 <div class="card-header text-center font-weight-bold">
                     Comments

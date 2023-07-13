@@ -11,7 +11,7 @@ class Tag extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['tag_name'];
 
     public function posts(): MorphToMany
     {
